@@ -7,7 +7,7 @@ const Container = styled.main`
     flex-direction:column;
     justify-content:space-evenly;
     align-items:center;
-    height:200vh;
+    height:140vh;
     background-color:#ade8f4;
     h2{
       width:80%;
@@ -51,8 +51,8 @@ const Adote = styled.section`
     display:flex;
     flex-direction:column;
     justify-content:space-evenly; 
-    height:100vh;
-
+    height:60vh;
+   
     
     section{
         display:flex;
@@ -78,7 +78,47 @@ const Adote = styled.section`
     }
     
 `
+const Load = styled.section`
+    display:flex;
+    flex-direction:column;
+    width:80%;
+    align-items:center;
+    height:20vh;
+   
+    
 
+    p{
+        width:100%;
+        display:flex;
+        flex-direction:row;
+        justify-content:center;
+
+    
+    }
+
+`
+const List = styled.section`
+        width:100%;
+        display:flex;
+        align-items:center;
+        flex-direction:column;
+        justify-content:space-evenly;
+        height:15vh;
+  
+ 
+
+`
+const Photos = styled.section`
+    display:flex;
+    align-items:center;
+    flex-direction:column;
+    justify-content:center;  
+
+    
+`
+const Button = styled.button`
+
+    `
 
 class Main extends Component {
     state = {
@@ -87,28 +127,28 @@ class Main extends Component {
             {
                 id: 1,
                 age: "5 meses",
-                button: "adotar",
+                button: "Adotar",
                 name: "Luna",
                 img: "https://blog.cobasi.com.br/wp-content/uploads/2020/09/cachorros-pequenos-capa.png",
             },
             {
                 id: 2,
                 age: "2 anos",
-                button: "adotar",
+                button: "Adotar",
                 name: "Duque",
                 img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJOHUGs2BXpZppeDw1i_qAKDky9RqqtsU8Ag&usqp=CAU",
             },
             {
                 id: 3,
                 age: "1 ano e 4 meses",
-                button: "adotar",
+                button: "Adotar",
                 name: "Pérola",
                 img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRI8rYjkSunH6RpixXVv552Wmtq2cfY5eCCDQ&usqp=CAU"
             },
             {
                 id: 4,
                 age: "3 meses",
-                button: "adotar",
+                button: "Adotar",
                 name: "Thor",
                 img: "https://images.unsplash.com/photo-1611003228941-98852ba62227?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8YmFieSUyMGRvZ3xlbnwwfHwwfHw%3D&w=1000&q=80"
 
@@ -118,12 +158,21 @@ class Main extends Component {
         ],
 
     }
-    More = (id) => {
-        const dogs = this.state.dogs.filter((item) => item === id)
-        this.setState({
-            listdogs: this.state.listdogs.concat(dogs)
 
+    More = () => {
+
+        this.setState({
+            listdogs: this.state.dogs.map((item) => (
+                <List>
+                    <p>{item.age}</p>
+                    <button>{item.button}</button>
+                </List>
+            )),
+           
+  
         })
+      
+
     }
 
     render() {
@@ -136,7 +185,7 @@ class Main extends Component {
                 </div>
                 <h2>Sobre</h2>
                 <p>Lorem Ipsum is simply dummy text of the
-                    printing and typesetting industry. Lorem Ipsum has been the industry's standard
+                    printing and typesetting industry. Lorem Ipsum has been the industry standard
                     dummy text ever since the 1500s, when an
                     unknown printer took a galley of type and
                     scrambled it to make a type specimen book. It
@@ -159,29 +208,25 @@ class Main extends Component {
                     and more recently with desktop publishing software like Aldus PageMaker
                     including versions of Lorem Ipsum.
                 </p>
-                <Adote>
+                <Photos>
+                     <Adote>
                     <h2>Adote</h2>
                     <section>
 
                         {this.state.dogs.map((item) => (
                             <div>
-
-
                                 <img src={item.img} alt=" dog " />
                                 <h3>{item.name}</h3>
-                                <button onClick={() => this.More(item)}>Ler mais</button>
-                                <ul>
-                                    {this.state.listdogs.map((item) => (
-                                        <li>{item.age}</li>
-                                    ))}
-                                </ul>
-
-
-
                             </div>
                         ))}
                     </section>
                 </Adote>
+                <Load>
+                    <p>{this.state.listdogs}</p>
+                    <button id="seuBotao" onClick={this.More}>Ler mais</button>
+                </Load> 
+                </Photos>
+              
             </Container>
         )
     }
